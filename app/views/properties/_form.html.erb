@@ -35,7 +35,24 @@
     <%= form.text_area :note %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  
+  <%= form.fields_for :closest_stations do |closest_station| %>
+    <%# チェリー本コラム参考 %>
+    <% @n ||= 0 %>
+    <h2>最寄り駅<%= @n += 1 %></h2>
+    <div class="line_name">
+      <%= closest_station.label :路線名 %><br>
+      <%= closest_station.text_field :line_name %>
+    </div>
+    <div class="station">
+      <%= closest_station.label :駅名 %><br>
+      <%= closest_station.text_field :station %>
+    </div>
+    <div class="time">
+      <%= closest_station.label :徒歩分数 %><br>
+      <%= closest_station.text_field :time %>分<br>
+    </div>
+    <%= form.submit '登録する' %>
+    <% end %>
+
   <% end %>

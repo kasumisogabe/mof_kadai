@@ -7,6 +7,8 @@ class PropertiesController < ApplicationController
 
   def new
     @property = Property.new
+    # @property.closest_stations.new
+    2.times { @property.closest_stations.build }
   end
 
   def create
@@ -20,9 +22,11 @@ class PropertiesController < ApplicationController
   end
 
   def show
+    @closest_stations = @property.closest_stations
   end
 
   def edit
+    @property.closest_stations.build
   end
 
   def update
@@ -50,6 +54,6 @@ class PropertiesController < ApplicationController
 
     def property_params
       params.require(:property).permit(:name, :rent, :adress, :age, :note, 
-      stations_attributes: [:line_name, :station_name, :time, :_destroy, :id])
+      closest_stations_attributes: [:line_name, :station, :time, :id, :_destroy])
     end
 end
